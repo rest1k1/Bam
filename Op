@@ -1,0 +1,263 @@
+
+<Window x:Class="Lab8.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Авторизация" Height="300" Width="400"
+        WindowStartupLocation="CenterScreen">
+    <StackPanel Margin="30">
+        <TextBlock Text="Авторизация"
+                   FontSize="24" HorizontalAlignment="Center"
+                   Margin="0,0,0,20"/>
+
+        <TextBlock Text="Логин:"/>
+        <TextBox x:Name="LoginBox"
+                 AutomationProperties.AutomationId="LoginBox"
+                 Height="30" Margin="0,5,0,10"/>
+
+        <TextBlock Text="Пароль:"/>
+        <PasswordBox x:Name="PasswordBox"
+                     AutomationProperties.AutomationId="PasswordBox"
+                     Height="30" Margin="0,5,0,15"/>
+
+        <Button x:Name="LoginButton"
+                AutomationProperties.AutomationId="LoginButton"
+                Content="Войти" Height="35"
+                Click="LoginButton_Click"/>
+
+        <TextBlock x:Name="ErrorText"
+                   Foreground="Red" Margin="0,10,0,0"
+                   TextWrapping="Wrap"/>
+    </StackPanel>
+</Window>
+
+
+
+
+
+
+
+using System.Collections.Generic;
+using System.Windows;
+
+namespace Lab8;
+
+public partial class MainWindow : Window
+{
+    private static readonly Dictionary<string, (string Password, string Role)> Users =
+        new()
+        {
+            { "admin", ("12345", "Администратор") },
+            { "student", ("11111", "Пользователь") }
+        };
+
+    public MainWindow()
+    {
+        InitializeComponent();
+    }
+
+    private void LoginButton_Click(object sender, RoutedEventArgs e)
+    {
+        string login = LoginBox.Text.Trim();
+        string password = PasswordBox.Password;
+
+        if (string.IsNullOrWhiteSpace(login))
+        {
+            ErrorText.Text = "Введите логин.";
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(password))
+        {
+            ErrorText.Text = "Введите пароль.";
+            return;
+        }
+
+        if (!Users.TryGetValue(login, out var user))
+        {
+            ErrorText.Text = "Пользователь не найден.";
+            return;
+        }
+
+        if (user.Password != password)
+        {
+            ErrorText.Text = "Неверный пароль.";
+            return;
+        }
+
+        new WelcomeWindow(login, user.Role).Show();
+        Close();
+    }
+}
+
+
+
+
+
+
+
+
+
+<Window x:Class="Lab8.WelcomeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Главная страница" Height="200" Width="450"
+        WindowStartupLocation="CenterScreen">
+    <StackPanel VerticalAlignment="Center"
+                HorizontalAlignment="Center">
+        <TextBlock x:Name="WelcomeText"
+                   FontSize="20"
+                   TextAlignment="Center"
+                   Margin="15"/>
+    </StackPanel>
+</Window>
+
+
+
+
+
+
+
+
+
+
+using System.Windows;
+
+namespace Lab8;
+
+public partial class WelcomeWindow : Window
+{
+    public WelcomeWindow(string login, string role)
+    {
+        InitializeComponent();
+        WelcomeText.Text =
+            $"Добро пожаловать, {login}, ваша роль - {role}";
+    }
+}
+
+
+
+
+
+
+
+
+
+
+using System;
+using System.IO;
+using System.Threading;
+using FlaUI.Core;
+using FlaUI.Core.AutomationElements;
+using FlaUI.UIA3;
+using Xunit;
+
+public class LoginTests : IDisposable
+{
+    private readonly Application _app;
+    private readonly UIA3Automation _automation;
+    private readonly Window _window;
+
+    public LoginTests()
+    {
+        _app = Application.Launch(
+            @"C:\Путь\к\Lab8.exe");
+
+        _automation = new UIA3Automation();
+        _window = _app.GetMainWindow(_automation);
+
+        Thread.Sleep(500);
+    }
+
+    private void Screenshot(string name)
+    {
+        Directory.CreateDirectory("Screenshots");
+        _window.Capture().ToFile(
+            $"Screenshots/{name}.png");
+    }
+
+    private void Login(string login, string password)
+    {
+        _window.FindFirstDescendant(
+            cf => cf.ByAutomationId("LoginBox"))
+            .AsTextBox().Enter(login);
+
+        _window.FindFirstDescendant(
+            cf => cf.ByAutomationId("PasswordBox"))
+            .AsTextBox().Enter(password);
+
+        _window.FindFirstDescendant(
+            cf => cf.ByAutomationId("LoginButton"))
+            .AsButton().Invoke();
+
+        Thread.Sleep(500);
+    }
+
+    [Fact]
+    public void AdminLogin()
+    {
+        Login("admin", "12345");
+        Screenshot("AdminLogin");
+    }
+
+    [Fact]
+    public void UserLogin()
+    {
+        Login("student", "11111");
+        Screenshot("UserLogin");
+    }
+
+    [Fact]
+    public void EmptyLogin()
+    {
+        Login("", "12345");
+
+        Assert.Contains("Введите логин",
+            _window.FindFirstDescendant(
+                cf => cf.ByName("Введите логин."))
+                ?.Name ?? "Введите логин.");
+
+        Screenshot("EmptyLogin");
+    }
+
+    [Fact]
+    public void EmptyPassword()
+    {
+        Login("admin", "");
+        Screenshot("EmptyPassword");
+    }
+
+    [Fact]
+    public void UnknownUser()
+    {
+        Login("unknown", "12345");
+        Screenshot("UnknownUser");
+    }
+
+    [Fact]
+    public void WrongPassword()
+    {
+        Login("admin", "wrong");
+        Screenshot("WrongPassword");
+    }
+
+    public void Dispose()
+    {
+        _app.Close();
+        _automation.Dispose();
+        _app.Dispose();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
