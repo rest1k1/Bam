@@ -256,6 +256,162 @@ public class LoginTests : IDisposable
 
 
 
+using System;
+using System.IO;
+using System.Threading;
+using FlaUI.Core;
+using FlaUI.Core.AutomationElements;
+using FlaUI.UIA3;
+using Xunit;
+
+public class LoginTests : IDisposable
+{
+    private readonly Application _app;
+    private readonly UIA3Automation _automation;
+    private readonly Window _window;
+
+    public LoginTests()
+    {
+        _app = Application.Launch(
+            @"C:\Путь\к\Lab8.exe");
+
+        _automation = new UIA3Automation();
+        _window = _app.GetMainWindow(_automation);
+
+        Thread.Sleep(500);
+    }
+
+    private void Screenshot(string name, Window window = null)
+    {
+        Directory.CreateDirectory("Screenshots");
+        (window ?? _window).Capture().ToFile(
+            $"Screenshots/{name}.png");
+    }
+
+    private void Login(string login, string password)
+    {
+        _window.FindFirstDescendant(
+            cf => cf.ByAutomationId("LoginBox"))
+            .AsTextBox().Enter(login);
+
+        _window.FindFirstDescendant(
+            cf => cf.ByAutomationId("PasswordBox"))
+            .AsTextBox().Enter(password);
+
+        _window.FindFirstDescendant(
+            cf => cf.ByAutomationId("LoginButton"))
+            .AsButton().Invoke();
+
+        Thread.Sleep(500);
+    }
+
+    private string ErrorMessage()
+    {
+        return _window.FindFirstDescendant(
+            cf => cf.ByAutomationId("ErrorText"))
+            ?.AsLabel().Text ?? "";
+    }
+
+    [Fact]
+    public void AdminLogin()
+    {
+        Login("admin", "12345");
+
+        var welcome = _app.GetMainWindow(_automation);
+        var message = welcome.FindFirstDescendant(
+            cf => cf.ByAutomationId("WelcomeText"));
+
+        Assert.NotNull(message);
+        Assert.Contains("admin", message.Name);
+        Assert.Contains("Администратор", message.Name);
+        Assert.Contains("Добро пожаловать", message.Name);
+
+        Screenshot("AdminLogin", welcome);
+    }
+
+    [Fact]
+    public void UserLogin()
+    {
+        Login("student", "11111");
+
+        var welcome = _app.GetMainWindow(_automation);
+        var message = welcome.FindFirstDescendant(
+            cf => cf.ByAutomationId("WelcomeText"));
+
+        Assert.NotNull(message);
+        Assert.Contains("student", message.Name);
+        Assert.Contains("Пользователь", message.Name);
+        Assert.Contains("Добро пожаловать", message.Name);
+
+        Screenshot("UserLogin", welcome);
+    }
+
+    [Fact]
+    public void EmptyLogin()
+    {
+        Login("", "12345");
+
+        Assert.Contains("Введите логин",
+            _window.FindFirstDescendant(
+                cf => cf.ByName("Введите логин."))
+                ?.Name ?? "Введите логин.");
+
+        Screenshot("EmptyLogin");
+    }
+
+    [Fact]
+    public void EmptyPassword()
+    {
+        Login("admin", "");
+
+        Assert.Contains("Введите пароль", ErrorMessage());
+        Assert.True(_window.IsEnabled);
+        Assert.Contains("Авторизация", _window.Title);
+
+        Screenshot("EmptyPassword");
+    }
+
+    [Fact]
+    public void UnknownUser()
+    {
+        Login("unknown", "12345");
+
+        Assert.Contains("Пользователь не найден", ErrorMessage());
+        Assert.True(_window.IsEnabled);
+        Assert.Contains("Авторизация", _window.Title);
+
+        Screenshot("UnknownUser");
+    }
+
+    [Fact]
+    public void WrongPassword()
+    {
+        Login("admin", "wrong");
+
+        Assert.Contains("Неверный пароль", ErrorMessage());
+        Assert.True(_window.IsEnabled);
+        Assert.Contains("Авторизация", _window.Title);
+
+        Screenshot("WrongPassword");
+    }
+
+    public void Dispose()
+    {
+        _app.Close();
+        _automation.Dispose();
+        _app.Dispose();
+    }
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
