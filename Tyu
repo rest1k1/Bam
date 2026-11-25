@@ -403,3 +403,297 @@ private string GetTicketFromDatabase(int ticketId)
 }
 
 
+
+
+
+
+
+<Window x:Class="LabWork24.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Сохранение билета"
+        Height="400"
+        Width="550"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="#F4F4F4">
+
+    <Grid Margin="30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="СОХРАНЕНИЕ БИЛЕТА"
+                   FontSize="25"
+                   FontWeight="Bold"
+                   Foreground="#333333"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+
+        <StackPanel Grid.Row="1"
+                    VerticalAlignment="Center">
+
+            <TextBlock Text="Введите номер билета:"
+                       FontSize="15"
+                       Margin="0,0,0,8"/>
+
+            <TextBox x:Name="TicketNumberBox"
+                     Height="35"
+                     FontSize="16"
+                     Padding="8"
+                     VerticalContentAlignment="Center"/>
+        </StackPanel>
+
+        <Button Grid.Row="2"
+                Content="Сохранить билет в TXT"
+                Height="42"
+                Width="260"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="#B8860B"
+                Foreground="White"
+                FontSize="15"
+                FontWeight="Bold"
+                BorderThickness="0"
+                Cursor="Hand"
+                Click="SaveButton_Click"/>
+
+        <TextBlock x:Name="StatusText"
+                   Grid.Row="3"
+                   FontSize="14"
+                   Foreground="#555555"
+                   TextAlignment="Center"
+                   VerticalAlignment="Center"
+                   TextWrapping="Wrap"/>
+    </Grid>
+</Window>
+
+
+
+
+
+
+
+
+
+using System;
+using System.Data.SqlClient;
+using System.IO;
+using System.Text;
+using System.Windows;
+using Microsoft.Win32;
+
+namespace LabWork24
+{
+    public partial class MainWindow : Window
+    {
+        // Подключение к базе данных
+        private readonly string connectionString =
+            @"Data Source=.\SQLEXPRESS;
+              Initial Catalog=ispp5503;
+              Integrated Security=True;";
+
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        /// <summary>
+        /// Обработка нажатия кнопки сохранения билета.
+        /// </summary>
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!int.TryParse(TicketNumberBox.Text.Trim(),
+                out int ticketId))
+            {
+                MessageBox.Show(
+                    "Введите корректный номер билета!",
+                    "Ошибка",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
+
+                return;
+            }
+
+            string ticketText = GetTicketFromDatabase(ticketId);
+
+            if (ticketText == null)
+                return;
+
+            SaveTicketToFile(ticketText, ticketId);
+        }
+
+        /// <summary>
+        /// Получение информации о билете из базы данных.
+        /// </summary>
+        private string GetTicketFromDatabase(int ticketId)
+        {
+            string query = @"
+                SELECT
+                    t.Id AS TicketNumber,
+                    f.Title AS FilmName,
+                    s.StartDateTime,
+                    h.Cinema AS CinemaName,
+                    h.HallId AS HallNumber,
+                    t.[Row] AS RowNumber,
+                    t.Place AS SeatNumber
+                FROM dbo.Ticket t
+                INNER JOIN dbo.Session s
+                    ON t.SessionId = s.Id
+                INNER JOIN dbo.Film f
+                    ON s.Film_Id = f.Id
+                INNER JOIN dbo.Hall h
+                    ON s.Hall_Id = h.Id
+                WHERE t.Id = @TicketId";
+
+            try
+            {
+                using (SqlConnection connection =
+                    new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command =
+                        new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue(
+                            "@TicketId", ticketId);
+
+                        using (SqlDataReader reader =
+                            command.ExecuteReader())
+                        {
+                            if (!reader.Read())
+                            {
+                                MessageBox.Show(
+                                    "Билет с таким номером не найден!",
+                                    "Поиск билета",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Warning);
+
+                                return null;
+                            }
+
+                            string filmName =
+                                reader["FilmName"].ToString();
+
+                            DateTime startTime =
+                                Convert.ToDateTime(
+                                    reader["StartDateTime"]);
+
+                            string cinemaName =
+                                reader["CinemaName"].ToString();
+
+                            string hallNumber =
+                                reader["HallNumber"].ToString();
+
+                            string rowNumber =
+                                reader["RowNumber"].ToString();
+
+                            string seatNumber =
+                                reader["SeatNumber"].ToString();
+
+                            StringBuilder ticket = new StringBuilder();
+
+                            ticket.AppendLine("Билет № " + ticketId);
+                            ticket.AppendLine(
+                                "Название фильма: " + filmName);
+
+                            ticket.AppendLine(
+                                "Начало сеанса: " +
+                                startTime.ToString("HH:mm dd.MM.yyyy"));
+
+                            ticket.AppendLine(
+                                "Кинотеатр: " + cinemaName);
+
+                            ticket.AppendLine(
+                                "Зал: " + hallNumber);
+
+                            ticket.AppendLine(
+                                "Ряд: " + rowNumber);
+
+                            ticket.AppendLine(
+                                "Место: " + seatNumber);
+
+                            return ticket.ToString();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Ошибка при получении данных из БД:\n" +
+                    ex.Message,
+                    "Ошибка подключения",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Сохранение билета в текстовый файл.
+        /// </summary>
+        private void SaveTicketToFile(string ticketText, int ticketId)
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+
+            dialog.Filter = "Текстовые файлы (*.txt)|*.txt";
+            dialog.Title = "Сохранение билета";
+            dialog.FileName = "Билет_" + ticketId + ".txt";
+
+            if (dialog.ShowDialog() == true)
+            {
+                try
+                {
+                    File.WriteAllText(
+                        dialog.FileName,
+                        ticketText,
+                        Encoding.UTF8);
+
+                    StatusText.Text = "Билет успешно сохранён!";
+
+                    MessageBox.Show(
+                        "Билет успешно сохранён!",
+                        "Успешно",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        "Ошибка сохранения файла:\n" + ex.Message,
+                        "Ошибка",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+<Application x:Class="LabWork24.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+    </Application.Resources>
+</Application>
+
+
+
+
+
+
+
+
+
