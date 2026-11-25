@@ -301,3 +301,105 @@ ORDER BY TABLE_NAME, ORDINAL_POSITION;
 
 
 
+
+
+
+
+
+
+
+
+
+
+/// <summary>
+/// Получение информации о билете из базы данных.
+/// </summary>
+private string GetTicketFromDatabase(int ticketId)
+{
+    string query = @"
+        SELECT
+            t.Id AS TicketNumber,
+            f.Title AS FilmName,
+            s.StartDateTime,
+            h.Cinema AS CinemaName,
+            h.HallId AS HallNumber,
+            t.[Row] AS RowNumber,
+            t.Place AS SeatNumber
+        FROM dbo.Ticket t
+        INNER JOIN dbo.Session s
+            ON t.SessionId = s.Id
+        INNER JOIN dbo.Film f
+            ON s.Film_Id = f.Id
+        INNER JOIN dbo.Hall h
+            ON s.Hall_Id = h.Id
+        WHERE t.Id = @TicketId";
+
+    try
+    {
+        using (SqlConnection connection =
+            new SqlConnection(connectionString))
+        {
+            connection.Open();
+
+            using (SqlCommand command =
+                new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue(
+                    "@TicketId", ticketId);
+
+                using (SqlDataReader reader =
+                    command.ExecuteReader())
+                {
+                    if (!reader.Read())
+                        return null;
+
+                    string filmName =
+                        reader["FilmName"].ToString();
+
+                    DateTime startTime =
+                        Convert.ToDateTime(reader["StartDateTime"]);
+
+                    string cinemaName =
+                        reader["CinemaName"].ToString();
+
+                    string hallNumber =
+                        reader["HallNumber"].ToString();
+
+                    string rowNumber =
+                        reader["RowNumber"].ToString();
+
+                    string seatNumber =
+                        reader["SeatNumber"].ToString();
+
+                    StringBuilder ticket = new StringBuilder();
+
+                    ticket.AppendLine("Билет № " + ticketId);
+                    ticket.AppendLine("Название фильма: " + filmName);
+
+                    ticket.AppendLine(
+                        "Начало сеанса: " +
+                        startTime.ToString("HH:mm dd.MM.yyyy"));
+
+                    ticket.AppendLine("Кинотеатр: " + cinemaName);
+                    ticket.AppendLine("Зал: " + hallNumber);
+                    ticket.AppendLine("Ряд: " + rowNumber);
+                    ticket.AppendLine("Место: " + seatNumber);
+
+                    return ticket.ToString();
+                }
+            }
+        }
+    }
+    catch (Exception ex)
+    {
+        MessageBox.Show(
+            "Ошибка при получении данных из БД:\n" + ex.Message,
+            "Ошибка подключения",
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Error);
+
+        return null;
+    }
+}
+
+
