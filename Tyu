@@ -267,10 +267,36 @@ namespace LabWork22
                     }
                 }
             }
+
+
+
         }
     }
 }
 
+
+
+
+
+
+
+USE ispp5503;
+
+SELECT
+    TABLE_NAME,
+    COLUMN_NAME,
+    DATA_TYPE
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME IN
+(
+    'Ticket',
+    'Session',
+    'Film',
+    'Films',
+    'Hall',
+    'Cinema'
+)
+ORDER BY TABLE_NAME, ORDINAL_POSITION;
 
 
 
