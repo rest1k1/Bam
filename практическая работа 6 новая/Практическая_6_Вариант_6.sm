@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SMath xmlns="http://smath.info/schemas/SMathStudio/0.99">
+  <Worksheet>
+    <PageSettings>
+      <PageWidth>210</PageWidth><PageHeight>297</PageHeight><Unit>mm</Unit>
+    </PageSettings>
+    <Regions>
+      <Region Type="Text"><Text>Практическая работа № 6. Вариант 6. См. задание 4.1 и 4.2.</Text></Region>
+      <Region Type="Text"><Text>Задание 4.1. Многочлен Лагранжа</Text></Region>
+      <Region Type="Assignment"><Expression>x := [1 2 4 7]</Expression></Region>
+      <Region Type="Assignment"><Expression>y := [-3 -7 2 8]</Expression></Region>
+      <Region Type="Assignment"><Expression>L0(x) := (x-2)/(1-2)*(x-4)/(1-4)*(x-7)/(1-7)</Expression></Region>
+      <Region Type="Assignment"><Expression>L1(x) := (x-1)/(2-1)*(x-4)/(2-4)*(x-7)/(2-7)</Expression></Region>
+      <Region Type="Assignment"><Expression>L2(x) := (x-1)/(4-1)*(x-2)/(4-2)*(x-7)/(4-7)</Expression></Region>
+      <Region Type="Assignment"><Expression>L3(x) := (x-1)/(7-1)*(x-2)/(7-2)*(x-4)/(7-4)</Expression></Region>
+      <Region Type="Assignment"><Expression>P(x) := -3*L0(x)-7*L1(x)+2*L2(x)+8*L3(x)</Expression></Region>
+      <Region Type="Calculation"><Expression>P(1.59)</Expression></Region>
+      <Region Type="Text"><Text>Задание 4.2. Первая и вторая формулы Ньютона</Text></Region>
+      <Region Type="Assignment"><Expression>h := 0.5</Expression></Region>
+      <Region Type="Assignment"><Expression>q1 := (0.5-0.1)/h</Expression></Region>
+      <Region Type="Assignment"><Expression>P1(a) := 1.02+q1*1.01+q1*(q1-1)/2*0.01+q1*(q1-1)*(q1-2)/6*3.15+q1*(q1-1)*(q1-2)*(q1-3)/24*(-9.27)</Expression></Region>
+      <Region Type="Calculation"><Expression>P1(0.5)</Expression></Region>
+      <Region Type="Assignment"><Expression>q2 := (1.9-2.1)/h</Expression></Region>
+      <Region Type="Assignment"><Expression>P2(b) := 8.45+q2*1.22+q2*(q2+1)/2*(-2.96)+q2*(q2+1)*(q2+2)/6*(-6.12)+q2*(q2+1)*(q2+2)*(q2+3)/24*(-9.27)</Expression></Region>
+      <Region Type="Calculation"><Expression>P2(1.9)</Expression></Region>
+    </Regions>
+  </Worksheet>
+</SMath>
