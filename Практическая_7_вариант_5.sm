@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Worksheet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Settings>
+    <Setting name="Language">ru-RU</Setting>
+    <Setting name="PageWidth">21</Setting>
+    <Setting name="PageHeight">29.7</Setting>
+  </Settings>
+  <Regions>
+    <Region type="Text">
+      <Content>Практическая работа № 7. Вариант 5</Content>
+    </Region>
+    <Region type="Text">
+      <Content>Вычисление интеграла методами прямоугольников, трапеций и парабол</Content>
+    </Region>
+    <Region type="Text">
+      <Content>Подынтегральная функция:</Content>
+    </Region>
+    <Region type="Math">
+      <Content>f(x):=sqrt(2*x^2+1.6)/(2*x+sqrt(0.5*x^2+3))</Content>
+    </Region>
+    <Region type="Text">
+      <Content>Пределы интегрирования:</Content>
+    </Region>
+    <Region type="Math">
+      <Content>a:=1.2</Content>
+    </Region>
+    <Region type="Math">
+      <Content>b:=2.0</Content>
+    </Region>
+    <Region type="Text">
+      <Content>Точное значение интеграла (встроенный оператор SMath):</Content>
+    </Region>
+    <Region type="Math">
+      <Content>I_точн:=int(f(x),x,a,b)</Content>
+    </Region>
+    <Region type="Math">
+      <Content>I_точн=0.3938236881</Content>
+    </Region>
+    <Region type="Text">
+      <Content>===== n = 10 =====</Content>
+    </Region>
+    <Region type="Math">
+      <Content>n:=10</Content>
+    </Region>
+    <Region type="Math">
+      <Content>h:=(b-a)/n</Content>
+    </Region>
+    <Region type="Math">
+      <Content>h=0.08</Content>
+    </Region>
+    <Region type="Text">
+      <Content>1. Метод левых прямоугольников:</Content>
+    </Region>
+    <Region type="Math">
+      <Content>I_лев:=h*sum(f(a+i*h),i,0,n-1)</Content>
+    </Region>
+    <Region type="Math">
+      <Content>I_лев=0.3935142817</Content>
+    </Region>
+    <Region type="Math">
+      <Content>δ_лев:=abs(I_лев-I_точн)/abs(I_точн)*100</Content>
+    </Region>
+    <Region type="Math">
+      <Content>δ_лев=0.078565 %</Content>
+    </Region>
+    <Region type="Text">
+      <Content>2. Метод правых прямоугольников:</Content>
+    </Region>
+    <Region type="Math">
+      <Content>I_прав:=h*sum(f(a+i*h),i,1,n)</Content>
+    </Region>
+    <Region type="Math">
+      <Content>I_прав=0.3941449694</Content>
+    </Region>
+    <Region type="Math">
+      <Content>δ_прав:=abs(I_прав-I_точн)/abs(I_точн)*100</Content>
+    </Region>
+    <Region type="Math">
+      <Content>δ_прав=0.08158 %</Content>
+    </Region>
+    <Region type="Text">
+      <Content>3. Метод средних прямоугольников:</Content>
+    </Region>
+    <Region type="Math">
+      <Content>I_сред:=h*sum(f(a+(i+0.5)*h),i,0,n-1)</Content>
+    </Region>
+    <Region type="Math">
+      <Content>I_сред=0.3938207233</Content>
+    </Region>
+    <Region type="Math">
+      <Content>δ_сред:=abs(I_сред-I_точн)/abs(I_точн)*100</Content>
+    </Region>
+    <Region type="Math">
+      <Content>δ_сред=0.000753 %</Content>
+    </Region>
+    <Region type="Text">
+      <Content>4. Метод трапеций:</Content>
+    </Region>
+    <Region type="Math">
+      <Content>I_трап:=(h/2)*(f(a)+f(b)+2*sum(f(a+i*h),i,1,n-1))</Content>
+    </Region>
+    <Region type="Math">
+      <Content>I_трап=0.3938296256</Content>
+    </Region>
+    <Region type="Math">
+      <Content>δ_трап:=abs(I_трап-I_точн)/abs(I_точн)*100</Content>
+    </Region>
+    <Region type="Math">
+      <Content>δ_трап=0.001508 %</Content>
+    </Region>
+    <Region type="Text">
+      <Content>5. Метод парабол (Симпсона):</Content>
+    </Region>
+    <Region type="Math">
+      <Content>I_симп:=(h/3)*(f(a)+f(b)+4*sum(f(a+(2*i-1)*h),i,1,n/2)+2*sum(f(a+2*i*h),i,1,n/2-1))</Content>
+    </Region>
+    <Region type="Math">
+      <Content>I_симп=0.3938237303</Content>
+    </Region>
+    <Region type="Math">
+      <Content>δ_симп:=abs(I_симп-I_точн)/abs(I_точн)*100</Content>
+    </Region>
+    <Region type="Math">
+      <Content>δ_симп=0.00001072 %</Content>
+    </Region>
+    <Region type="Text">
+      <Content>===== n = 20 =====</Content>
+    </Region>
+    <Region type="Math">
+      <Content>n2:=20</Content>
+    </Region>
+    <Region type="Math">
+      <Content>h2:=(b-a)/n2</Content>
+    </Region>
+    <Region type="Text">
+      <Content>Метод левых прямоугольников (n=20):</Content>
+    </Region>
+    <Region type="Math">
+      <Content>I_лев20:=h2*sum(f(a+i*h2),i,0,n2-1)</Content>
+    </Region>
+    <Region type="Math">
+      <Content>I_лев20=0.3936675025</Content>
+    </Region>
+    <Region type="Math">
+      <Content>δ_лев20:=abs(I_лев20-I_точн)/abs(I_точн)*100</Content>
+    </Region>
+    <Region type="Math">
+      <Content>δ_лев20=0.039659 %</Content>
+    </Region>
+    <Region type="Text">
+      <Content>Метод парабол (n=20):</Content>
+    </Region>
+    <Region type="Math">
+      <Content>I_симп20:=(h2/3)*(f(a)+f(b)+4*sum(f(a+(2*i-1)*h2),i,1,n2/2)+2*sum(f(a+2*i*h2),i,1,n2/2-1))</Content>
+    </Region>
+    <Region type="Math">
+      <Content>I_симп20=0.3938236907</Content>
+    </Region>
+    <Region type="Math">
+      <Content>δ_симп20:=abs(I_симп20-I_точн)/abs(I_точн)*100</Content>
+    </Region>
+    <Region type="Math">
+      <Content>δ_симп20=0.000000674 %</Content>
+    </Region>
+    <Region type="Text">
+      <Content>===== Оценка Rn методом двойного пересчёта =====</Content>
+    </Region>
+    <Region type="Text">
+      <Content>Для левых прямоугольников (порядок p=1):</Content>
+    </Region>
+    <Region type="Math">
+      <Content>Rn_лев:=abs(I_лев-I_лев20)/(2^1-1)</Content>
+    </Region>
+    <Region type="Math">
+      <Content>Rn_лев=0.00015322</Content>
+    </Region>
+    <Region type="Text">
+      <Content>Для метода парабол (порядок p=4):</Content>
+    </Region>
+    <Region type="Math">
+      <Content>Rn_симп:=abs(I_симп-I_симп20)/(2^4-1)</Content>
+    </Region>
+    <Region type="Math">
+      <Content>Rn_симп=2.638e-9</Content>
+    </Region>
+    <Region type="Text">
+      <Content>Вывод: метод парабол (Симпсона) даёт наименьшую погрешность.</Content>
+    </Region>
+  </Regions>
+</Worksheet>
