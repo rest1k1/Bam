@@ -4,7 +4,7 @@
   <settings ppi="96">
     <identity>
       <id>64a49b40-ed65-426e-beae-de6bcb413e5f</id>
-      <revision>4</revision>
+      <revision>6</revision>
     </identity>
     <calculation>
       <precision>4</precision>
@@ -69,7 +69,7 @@
       </math>
     </region>
     <region left="306" top="90" width="351" height="220" color="#000000" fontSize="10">
-      <plot type="2d" render="lines" scale_x="0.895338254258717" scale_y="1.01501916387071" scale_z="0.895338254258717" rotate_x="0" rotate_y="0" rotate_z="0" transpose_x="-45" transpose_y="-22" transpose_z="0">
+      <plot type="2d" render="lines" scale_x="0.515483428183617" scale_y="0.584388699773964" scale_z="0.515483428183617" rotate_x="0" rotate_y="0" rotate_z="0" transpose_x="-45" transpose_y="-12" transpose_z="0">
         <description active="false" position="Top" lang="eng">
           <content>
             <p></p>
@@ -196,7 +196,7 @@
         </input>
       </math>
     </region>
-    <region left="45" top="657" width="122" height="43" color="#000000" fontSize="10">
+    <region left="45" top="666" width="122" height="43" color="#000000" fontSize="10">
       <math>
         <input>
           <e type="operand">x</e>
@@ -211,7 +211,7 @@
         </input>
       </math>
     </region>
-    <region left="0" top="702" width="949" height="44" color="#000000" fontSize="10">
+    <region left="0" top="711" width="949" height="44" color="#000000" fontSize="10">
       <math>
         <input>
           <e type="operand">x</e>
@@ -283,7 +283,7 @@
         </input>
       </math>
     </region>
-    <region left="45" top="756" width="62" height="24" color="#000000" fontSize="10">
+    <region left="45" top="765" width="62" height="24" color="#000000" fontSize="10">
       <math>
         <input>
           <e type="operand">b</e>
@@ -292,7 +292,7 @@
         </input>
       </math>
     </region>
-    <region left="36" top="792" width="109" height="25" color="#000000" fontSize="10">
+    <region left="36" top="801" width="109" height="25" color="#000000" fontSize="10">
       <math>
         <input>
           <e type="operand">b</e>
