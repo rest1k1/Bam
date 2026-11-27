@@ -30,7 +30,14 @@
     </dependencies>
   </settings>
   <regions type="content">
-    <region left="36" top="9" width="331" height="43" color="#000000" fontSize="10">
+    <region left="36" top="9" width="720" height="24" color="#000000" fontSize="10">
+      <text lang="rus">
+        <content>
+          <p bold="true"><r>Практическая работа № 6, вариант 6. Задания 4.1 и 4.2 — интерполяционный многочлен Лагранжа. Узлы: x = 1; 2; 4; 7, y = −3; −7; 2; 8, a = 1,59</r></p>
+        </content>
+      </text>
+    </region>
+    <region left="36" top="45" width="331" height="43" color="#000000" fontSize="10">
       <math>
         <input>
           <e type="operand">x</e>
@@ -68,50 +75,14 @@
         </input>
       </math>
     </region>
-    <region left="306" top="90" width="351" height="220" color="#000000" fontSize="10">
-      <plot type="2d" render="lines" scale_x="0.515483428183617" scale_y="0.584388699773964" scale_z="0.515483428183617" rotate_x="0" rotate_y="0" rotate_z="0" transpose_x="-45" transpose_y="-12" transpose_z="0">
-        <description active="false" position="Top" lang="eng">
-          <content>
-            <p></p>
-          </content>
-        </description>
-        <input>
-          <e type="operand">x</e>
-          <e type="function" args="1">L</e>
-          <e type="operand">5</e>
-          <e type="operand">9</e>
-          <e type="operator" args="2">/</e>
-          <e type="operator" args="1">-</e>
-          <e type="bracket">(</e>
-          <e type="operand">x</e>
-          <e type="operand">3</e>
-          <e type="operator" args="2">^</e>
-          <e type="operator" args="2">*</e>
-          <e type="operand">121</e>
-          <e type="operand">18</e>
-          <e type="operator" args="2">/</e>
-          <e type="bracket">(</e>
-          <e type="operand">x</e>
-          <e type="operand">2</e>
-          <e type="operator" args="2">^</e>
-          <e type="operator" args="2">*</e>
-          <e type="operator" args="2">+</e>
-          <e type="operand">365</e>
-          <e type="operand">18</e>
-          <e type="operator" args="2">/</e>
-          <e type="bracket">(</e>
-          <e type="operand">x</e>
-          <e type="operator" args="2">*</e>
-          <e type="operator" args="2">-</e>
-          <e type="operand">100</e>
-          <e type="operand">9</e>
-          <e type="operator" args="2">/</e>
-          <e type="operator" args="2">+</e>
-          <e type="operator" args="2">:</e>
-        </input>
-      </plot>
+    <region left="36" top="100" width="330" height="24" color="#000000" fontSize="10">
+      <text lang="rus">
+        <content>
+          <p><r>Проверка: многочлен проходит через узловые точки L(xi) = yi</r></p>
+        </content>
+      </text>
     </region>
-    <region left="54" top="117" width="80" height="25" color="#000000" fontSize="10">
+    <region left="54" top="128" width="80" height="25" color="#000000" fontSize="10">
       <math>
         <input>
           <e type="operand">1</e>
@@ -123,7 +94,7 @@
         </result>
       </math>
     </region>
-    <region left="54" top="153" width="80" height="25" color="#000000" fontSize="10">
+    <region left="54" top="155" width="80" height="25" color="#000000" fontSize="10">
       <math>
         <input>
           <e type="operand">2</e>
@@ -135,7 +106,7 @@
         </result>
       </math>
     </region>
-    <region left="54" top="180" width="67" height="25" color="#000000" fontSize="10">
+    <region left="54" top="182" width="67" height="25" color="#000000" fontSize="10">
       <math>
         <input>
           <e type="operand">4</e>
@@ -146,7 +117,7 @@
         </result>
       </math>
     </region>
-    <region left="54" top="207" width="67" height="25" color="#000000" fontSize="10">
+    <region left="54" top="209" width="67" height="25" color="#000000" fontSize="10">
       <math>
         <input>
           <e type="operand">7</e>
@@ -157,7 +128,49 @@
         </result>
       </math>
     </region>
-    <region left="54" top="270" width="70" height="24" color="#000000" fontSize="10">
+    <region left="36" top="245" width="330" height="24" color="#000000" fontSize="10">
+      <text lang="rus">
+        <content>
+          <p><r>Стандартный вид, коэффициенты округлены до 0,001:</r></p>
+        </content>
+      </text>
+    </region>
+    <region left="45" top="272" width="330" height="25" color="#000000" fontSize="10">
+      <math>
+        <input>
+          <e type="operand">x</e>
+          <e type="function" args="1">Lr</e>
+          <e type="operand">0.556</e>
+          <e type="operand">x</e>
+          <e type="operand">3</e>
+          <e type="operator" args="2">^</e>
+          <e type="operator" args="2">*</e>
+          <e type="operator" args="1">-</e>
+          <e type="bracket">(</e>
+          <e type="operand">6.722</e>
+          <e type="operand">x</e>
+          <e type="operand">2</e>
+          <e type="operator" args="2">^</e>
+          <e type="operator" args="2">*</e>
+          <e type="operator" args="2">+</e>
+          <e type="operand">20.278</e>
+          <e type="operand">x</e>
+          <e type="operator" args="2">*</e>
+          <e type="operator" args="2">-</e>
+          <e type="operand">11.111</e>
+          <e type="operator" args="2">+</e>
+          <e type="operator" args="2">:</e>
+        </input>
+      </math>
+    </region>
+    <region left="36" top="310" width="330" height="24" color="#000000" fontSize="10">
+      <text lang="rus">
+        <content>
+          <p><r>Задание 4.2 — значение в точке a:</r></p>
+        </content>
+      </text>
+    </region>
+    <region left="54" top="338" width="70" height="24" color="#000000" fontSize="10">
       <math>
         <input>
           <e type="operand">a</e>
@@ -166,7 +179,7 @@
         </input>
       </math>
     </region>
-    <region left="45" top="351" width="122" height="25" color="#000000" fontSize="10">
+    <region left="45" top="372" width="122" height="25" color="#000000" fontSize="10">
       <math>
         <input>
           <e type="operand">a</e>
@@ -178,7 +191,82 @@
         </result>
       </math>
     </region>
-    <region left="45" top="567" width="62" height="24" color="#000000" fontSize="10">
+    <region left="45" top="402" width="170" height="25" color="#000000" fontSize="10">
+      <math>
+        <input>
+          <e type="operand">a</e>
+          <e type="function" args="1">Lr</e>
+        </input>
+        <result action="numeric">
+          <e type="operand">6.3721</e>
+          <e type="operator" args="1">-</e>
+        </result>
+      </math>
+    </region>
+    <region left="36" top="440" width="330" height="24" color="#000000" fontSize="10">
+      <text lang="rus">
+        <content>
+          <p><r>Узловые точки M(xi; yi) для графика:</r></p>
+        </content>
+      </text>
+    </region>
+    <region left="45" top="468" width="150" height="100" color="#000000" fontSize="10">
+      <math>
+        <input>
+          <e type="operand">M1</e>
+          <e type="operand">1</e>
+          <e type="operand">3</e>
+          <e type="operator" args="1">-</e>
+          <e type="operand">2</e>
+          <e type="operand">7</e>
+          <e type="operator" args="1">-</e>
+          <e type="operand">4</e>
+          <e type="operand">2</e>
+          <e type="operand">7</e>
+          <e type="operand">8</e>
+          <e type="matrix" rows="4" cols="2">8</e>
+          <e type="operator" args="2">:</e>
+        </input>
+      </math>
+    </region>
+    <region left="400" top="45" width="351" height="300" color="#000000" fontSize="10">
+      <plot type="2d" render="lines" scale_x="0.515483428183617" scale_y="0.584388699773964" scale_z="0.515483428183617" rotate_x="0" rotate_y="0" rotate_z="0" transpose_x="-45" transpose_y="-12" transpose_z="0">
+        <description active="false" position="Top" lang="eng">
+          <content>
+            <p></p>
+          </content>
+        </description>
+        <input>
+          <e type="operand">x</e>
+          <e type="function" args="1">L</e>
+        </input>
+        <input>
+          <e type="operand">M1</e>
+        </input>
+      </plot>
+    </region>
+    <region left="400" top="350" width="351" height="24" color="#000000" fontSize="10">
+      <text lang="rus">
+        <content>
+          <p><r>График L(x) (линия) и узловые точки Mi (маркеры / вершины ломаной)</r></p>
+        </content>
+      </text>
+    </region>
+    <region left="36" top="600" width="720" height="24" color="#000000" fontSize="10">
+      <text lang="rus">
+        <content>
+          <p bold="true"><r>Многочлены Ньютона 4-й степени, таблица 2, вариант 6: x = 0,1; 0,6; 1,1; 1,6; 2,1; y = 1,02; 2,03; 3,05; 7,23; 8,45; a = 0,5; b = 1,9; h = 0,5</r></p>
+        </content>
+      </text>
+    </region>
+    <region left="36" top="630" width="720" height="24" color="#000000" fontSize="10">
+      <text lang="rus">
+        <content>
+          <p><r>Конечные разности (из Excel): Δy = 1,01; 1,02; 4,18; 1,22   Δ²y = 0,01; 3,16; −2,96   Δ³y = 3,15; −6,12   Δ⁴y = −9,27</r></p>
+        </content>
+      </text>
+    </region>
+    <region left="45" top="662" width="62" height="24" color="#000000" fontSize="10">
       <math>
         <input>
           <e type="operand">h</e>
@@ -187,7 +275,7 @@
         </input>
       </math>
     </region>
-    <region left="45" top="603" width="70" height="24" color="#000000" fontSize="10">
+    <region left="45" top="692" width="70" height="24" color="#000000" fontSize="10">
       <math>
         <input>
           <e type="operand">x0</e>
@@ -196,7 +284,14 @@
         </input>
       </math>
     </region>
-    <region left="45" top="666" width="122" height="43" color="#000000" fontSize="10">
+    <region left="36" top="725" width="330" height="24" color="#000000" fontSize="10">
+      <text lang="rus">
+        <content>
+          <p><r>I формула Ньютона (интерполяция вперёд), q = (x − x0)/h:</r></p>
+        </content>
+      </text>
+    </region>
+    <region left="45" top="752" width="122" height="43" color="#000000" fontSize="10">
       <math>
         <input>
           <e type="operand">x</e>
@@ -211,7 +306,7 @@
         </input>
       </math>
     </region>
-    <region left="0" top="711" width="949" height="44" color="#000000" fontSize="10">
+    <region left="0" top="798" width="949" height="44" color="#000000" fontSize="10">
       <math>
         <input>
           <e type="operand">x</e>
@@ -283,25 +378,386 @@
         </input>
       </math>
     </region>
-    <region left="45" top="765" width="62" height="24" color="#000000" fontSize="10">
+    <region left="36" top="850" width="330" height="24" color="#000000" fontSize="10">
+      <text lang="rus">
+        <content>
+          <p><r>Стандартный вид (коэффициенты округлены до 0,001):</r></p>
+        </content>
+      </text>
+    </region>
+    <region left="45" top="877" width="420" height="25" color="#000000" fontSize="10">
       <math>
         <input>
-          <e type="operand">b</e>
+          <e type="operand">x</e>
+          <e type="function" args="1">Ps</e>
+          <e type="operand">6.18</e>
+          <e type="operand">x</e>
+          <e type="operand">4</e>
+          <e type="operator" args="2">^</e>
+          <e type="operator" args="2">*</e>
+          <e type="operator" args="1">-</e>
+          <e type="bracket">(</e>
+          <e type="operand">25.212</e>
+          <e type="operand">x</e>
+          <e type="operand">3</e>
+          <e type="operator" args="2">^</e>
+          <e type="operator" args="2">*</e>
+          <e type="operator" args="2">+</e>
+          <e type="operand">30.468</e>
+          <e type="operand">x</e>
+          <e type="operand">2</e>
+          <e type="operator" args="2">^</e>
+          <e type="operator" args="2">*</e>
+          <e type="operator" args="2">-</e>
+          <e type="operand">14.107</e>
+          <e type="operand">x</e>
+          <e type="operator" args="2">*</e>
+          <e type="operator" args="2">+</e>
+          <e type="operand">0.111</e>
+          <e type="operator" args="2">-</e>
+          <e type="operator" args="2">:</e>
+        </input>
+      </math>
+    </region>
+    <region left="45" top="910" width="70" height="24" color="#000000" fontSize="10">
+      <math>
+        <input>
+          <e type="operand">aN</e>
           <e type="operand">0.5</e>
           <e type="operator" args="2">:</e>
         </input>
       </math>
     </region>
-    <region left="36" top="801" width="109" height="25" color="#000000" fontSize="10">
+    <region left="45" top="940" width="122" height="25" color="#000000" fontSize="10">
       <math>
         <input>
-          <e type="operand">b</e>
+          <e type="operand">aN</e>
           <e type="function" args="1">P</e>
         </input>
         <result action="numeric">
           <e type="operand">2.0912</e>
         </result>
       </math>
+    </region>
+    <region left="45" top="970" width="122" height="25" color="#000000" fontSize="10">
+      <math>
+        <input>
+          <e type="operand">aN</e>
+          <e type="function" args="1">Ps</e>
+        </input>
+        <result action="numeric">
+          <e type="operand">2.0907</e>
+        </result>
+      </math>
+    </region>
+    <region left="36" top="1005" width="330" height="24" color="#000000" fontSize="10">
+      <text lang="rus">
+        <content>
+          <p><r>Проверка узловых точек: P(xi) = yi</r></p>
+        </content>
+      </text>
+    </region>
+    <region left="45" top="1032" width="120" height="25" color="#000000" fontSize="10">
+      <math>
+        <input>
+          <e type="operand">0.1</e>
+          <e type="function" args="1">P</e>
+        </input>
+        <result action="numeric">
+          <e type="operand">1.02</e>
+        </result>
+      </math>
+    </region>
+    <region left="185" top="1032" width="120" height="25" color="#000000" fontSize="10">
+      <math>
+        <input>
+          <e type="operand">0.6</e>
+          <e type="function" args="1">P</e>
+        </input>
+        <result action="numeric">
+          <e type="operand">2.03</e>
+        </result>
+      </math>
+    </region>
+    <region left="325" top="1032" width="120" height="25" color="#000000" fontSize="10">
+      <math>
+        <input>
+          <e type="operand">1.1</e>
+          <e type="function" args="1">P</e>
+        </input>
+        <result action="numeric">
+          <e type="operand">3.05</e>
+        </result>
+      </math>
+    </region>
+    <region left="45" top="1062" width="120" height="25" color="#000000" fontSize="10">
+      <math>
+        <input>
+          <e type="operand">1.6</e>
+          <e type="function" args="1">P</e>
+        </input>
+        <result action="numeric">
+          <e type="operand">7.23</e>
+        </result>
+      </math>
+    </region>
+    <region left="185" top="1062" width="120" height="25" color="#000000" fontSize="10">
+      <math>
+        <input>
+          <e type="operand">2.1</e>
+          <e type="function" args="1">P</e>
+        </input>
+        <result action="numeric">
+          <e type="operand">8.45</e>
+        </result>
+      </math>
+    </region>
+    <region left="36" top="1110" width="330" height="24" color="#000000" fontSize="10">
+      <text lang="rus">
+        <content>
+          <p><r>II формула Ньютона (интерполяция назад), q = (x − x4)/h:</r></p>
+        </content>
+      </text>
+    </region>
+    <region left="45" top="1138" width="70" height="24" color="#000000" fontSize="10">
+      <math>
+        <input>
+          <e type="operand">x4</e>
+          <e type="operand">2.1</e>
+          <e type="operator" args="2">:</e>
+        </input>
+      </math>
+    </region>
+    <region left="45" top="1168" width="122" height="43" color="#000000" fontSize="10">
+      <math>
+        <input>
+          <e type="operand">x</e>
+          <e type="function" args="1">s</e>
+          <e type="operand">x</e>
+          <e type="operand">x4</e>
+          <e type="operator" args="2">-</e>
+          <e type="bracket">(</e>
+          <e type="operand">h</e>
+          <e type="operator" args="2">/</e>
+          <e type="operator" args="2">:</e>
+        </input>
+      </math>
+    </region>
+    <region left="0" top="1215" width="949" height="44" color="#000000" fontSize="10">
+      <math>
+        <input>
+          <e type="operand">x</e>
+          <e type="function" args="1">Q</e>
+          <e type="operand">8.45</e>
+          <e type="operand">1.22</e>
+          <e type="operand">x</e>
+          <e type="function" args="1">s</e>
+          <e type="operator" args="2">*</e>
+          <e type="operator" args="2">+</e>
+          <e type="operand">2.96</e>
+          <e type="operand">x</e>
+          <e type="function" args="1">s</e>
+          <e type="operator" args="2">*</e>
+          <e type="operand">x</e>
+          <e type="function" args="1">s</e>
+          <e type="operand">1</e>
+          <e type="operator" args="2">+</e>
+          <e type="bracket">(</e>
+          <e type="operand">2</e>
+          <e type="operator" args="2">/</e>
+          <e type="operator" args="2">*</e>
+          <e type="operator" args="2">-</e>
+          <e type="operand">6.12</e>
+          <e type="operand">x</e>
+          <e type="function" args="1">s</e>
+          <e type="operator" args="2">*</e>
+          <e type="operand">x</e>
+          <e type="function" args="1">s</e>
+          <e type="operand">1</e>
+          <e type="operator" args="2">+</e>
+          <e type="bracket">(</e>
+          <e type="operator" args="2">*</e>
+          <e type="operand">x</e>
+          <e type="function" args="1">s</e>
+          <e type="operand">2</e>
+          <e type="operator" args="2">+</e>
+          <e type="bracket">(</e>
+          <e type="operand">6</e>
+          <e type="operator" args="2">/</e>
+          <e type="operator" args="2">*</e>
+          <e type="operator" args="2">-</e>
+          <e type="operand">9.27</e>
+          <e type="operand">x</e>
+          <e type="function" args="1">s</e>
+          <e type="operator" args="2">*</e>
+          <e type="operand">x</e>
+          <e type="function" args="1">s</e>
+          <e type="operand">1</e>
+          <e type="operator" args="2">+</e>
+          <e type="bracket">(</e>
+          <e type="operator" args="2">*</e>
+          <e type="operand">x</e>
+          <e type="function" args="1">s</e>
+          <e type="operand">2</e>
+          <e type="operator" args="2">+</e>
+          <e type="bracket">(</e>
+          <e type="operator" args="2">*</e>
+          <e type="operand">x</e>
+          <e type="function" args="1">s</e>
+          <e type="operand">3</e>
+          <e type="operator" args="2">+</e>
+          <e type="bracket">(</e>
+          <e type="operand">24</e>
+          <e type="operator" args="2">/</e>
+          <e type="operator" args="2">*</e>
+          <e type="operator" args="2">-</e>
+          <e type="operator" args="2">:</e>
+        </input>
+      </math>
+    </region>
+    <region left="36" top="1265" width="720" height="24" color="#000000" fontSize="10">
+      <text lang="rus">
+        <content>
+          <p><r>Стандартный вид многочлена II формулы совпадает с I формулой (один и тот же многочлен 4-й степени по тем же узлам):</r></p>
+        </content>
+      </text>
+    </region>
+    <region left="45" top="1292" width="420" height="25" color="#000000" fontSize="10">
+      <math>
+        <input>
+          <e type="operand">x</e>
+          <e type="function" args="1">Qs</e>
+          <e type="operand">6.18</e>
+          <e type="operand">x</e>
+          <e type="operand">4</e>
+          <e type="operator" args="2">^</e>
+          <e type="operator" args="2">*</e>
+          <e type="operator" args="1">-</e>
+          <e type="bracket">(</e>
+          <e type="operand">25.212</e>
+          <e type="operand">x</e>
+          <e type="operand">3</e>
+          <e type="operator" args="2">^</e>
+          <e type="operator" args="2">*</e>
+          <e type="operator" args="2">+</e>
+          <e type="operand">30.468</e>
+          <e type="operand">x</e>
+          <e type="operand">2</e>
+          <e type="operator" args="2">^</e>
+          <e type="operator" args="2">*</e>
+          <e type="operator" args="2">-</e>
+          <e type="operand">14.107</e>
+          <e type="operand">x</e>
+          <e type="operator" args="2">*</e>
+          <e type="operator" args="2">+</e>
+          <e type="operand">0.111</e>
+          <e type="operator" args="2">-</e>
+          <e type="operator" args="2">:</e>
+        </input>
+      </math>
+    </region>
+    <region left="45" top="1325" width="70" height="24" color="#000000" fontSize="10">
+      <math>
+        <input>
+          <e type="operand">bN</e>
+          <e type="operand">1.9</e>
+          <e type="operator" args="2">:</e>
+        </input>
+      </math>
+    </region>
+    <region left="45" top="1355" width="122" height="25" color="#000000" fontSize="10">
+      <math>
+        <input>
+          <e type="operand">bN</e>
+          <e type="function" args="1">Q</e>
+        </input>
+        <result action="numeric">
+          <e type="operand">9.0945</e>
+        </result>
+      </math>
+    </region>
+    <region left="45" top="1385" width="122" height="25" color="#000000" fontSize="10">
+      <math>
+        <input>
+          <e type="operand">bN</e>
+          <e type="function" args="1">Qs</e>
+        </input>
+        <result action="numeric">
+          <e type="operand">9.0936</e>
+        </result>
+      </math>
+    </region>
+    <region left="36" top="1420" width="330" height="24" color="#000000" fontSize="10">
+      <text lang="rus">
+        <content>
+          <p><r>Узловые точки M(xi; yi) для графиков:</r></p>
+        </content>
+      </text>
+    </region>
+    <region left="45" top="1448" width="170" height="125" color="#000000" fontSize="10">
+      <math>
+        <input>
+          <e type="operand">M2</e>
+          <e type="operand">0.1</e>
+          <e type="operand">1.02</e>
+          <e type="operand">0.6</e>
+          <e type="operand">2.03</e>
+          <e type="operand">1.1</e>
+          <e type="operand">3.05</e>
+          <e type="operand">1.6</e>
+          <e type="operand">7.23</e>
+          <e type="operand">2.1</e>
+          <e type="operand">8.45</e>
+          <e type="matrix" rows="5" cols="2">10</e>
+          <e type="operator" args="2">:</e>
+        </input>
+      </math>
+    </region>
+    <region left="400" top="660" width="351" height="24" color="#000000" fontSize="10">
+      <text lang="rus">
+        <content>
+          <p><r>График P(x) — I формула Ньютона, узлы M0…M4</r></p>
+        </content>
+      </text>
+    </region>
+    <region left="400" top="688" width="351" height="260" color="#000000" fontSize="10">
+      <plot type="2d" render="lines" scale_x="1" scale_y="1" scale_z="1" rotate_x="0" rotate_y="0" rotate_z="0" transpose_x="0" transpose_y="0" transpose_z="0">
+        <description active="false" position="Top" lang="eng">
+          <content>
+            <p></p>
+          </content>
+        </description>
+        <input>
+          <e type="operand">x</e>
+          <e type="function" args="1">P</e>
+        </input>
+        <input>
+          <e type="operand">M2</e>
+        </input>
+      </plot>
+    </region>
+    <region left="400" top="1140" width="351" height="24" color="#000000" fontSize="10">
+      <text lang="rus">
+        <content>
+          <p><r>График Q(x) — II формула Ньютона, узлы M0…M4</r></p>
+        </content>
+      </text>
+    </region>
+    <region left="400" top="1168" width="351" height="260" color="#000000" fontSize="10">
+      <plot type="2d" render="lines" scale_x="1" scale_y="1" scale_z="1" rotate_x="0" rotate_y="0" rotate_z="0" transpose_x="0" transpose_y="0" transpose_z="0">
+        <description active="false" position="Top" lang="eng">
+          <content>
+            <p></p>
+          </content>
+        </description>
+        <input>
+          <e type="operand">x</e>
+          <e type="function" args="1">Q</e>
+        </input>
+        <input>
+          <e type="operand">M2</e>
+        </input>
+      </plot>
     </region>
   </regions>
 </worksheet>
